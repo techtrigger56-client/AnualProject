@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Enterprise System — Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div>
+      <span class="ws-status offline" id="wsIndicator"></span>
+      <strong>Smart Enterprise System</strong>
+    </div>
+    <div class="user-info">
+      <span id="userName"></span> · <span id="userRole"></span>
+      &nbsp;<button class="secondary" style="width:auto;padding:0.3rem 0.8rem;" onclick="logout()">Sair</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Controlo de Acesso</h2>
+      <div id="relayStatus" class="actions-row"></div>
+      <table>
+        <thead><tr><th>Hora</th><th>Colaborador</th><th>Ação</th><th>Estado</th></tr></thead>
+        <tbody id="accessLogsBody"></tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Ambiente</h2>
+      <div class="env-grid" id="envStats"></div>
+      <table>
+        <thead><tr><th>Hora</th><th>Local</th><th>Temp.</th><th>Humid.</th><th>Fumo (MQ135)</th></tr></thead>
+        <tbody id="envLogsBody"></tbody>
+      </table>
+    </section>
+
+    <section class="card" data-admin-only>
+      <h2>Segurança</h2>
+      <div class="actions-row">
+        <button class="danger" id="btnLockdown">Ativar Lockdown</button>
+        <button class="danger" id="btnEvacuation">Ativar Evacuação</button>
+      </div>
+      <table>
+        <thead><tr><th>Hora</th><th>Tipo</th><th>Descrição</th><th>Severidade</th><th>Estado</th><th></th></tr></thead>
+        <tbody id="securityEventsBody"></tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Fotos Recentes</h2>
+      <div class="photo-grid" id="photoGrid"></div>
+    </section>
+    
+    <section class="card">
+  <h2>O Meu Perfil</h2>
+  <form class="collab-form" id="profileForm">
+    <input type="text" id="profileName" placeholder="Nome">
+    <input type="password" id="profileNewPassword" placeholder="Nova password (opcional)">
+    <input type="password" id="profileCurrentPassword" placeholder="Password atual (obrigatória)" required>
+    <p class="error-text" id="profileError"></p>
+    <button type="submit">Guardar Alterações</button>
+  </form>
+</section>
+
+    <section class="card" data-admin-only>
+  <h2>Colaboradores</h2>
+  <form class="collab-form" id="collabForm">
+    <input type="text" id="newName" placeholder="Nome" required>
+    <input type="text" id="newRfid" placeholder="RFID UID" required>
+    <input type="password" id="newPassword" placeholder="Password" required>
+    <select id="newRole">
+      <option value="worker">Funcionário</option>
+      <option value="admin">Admin</option>
+    </select>
+    <button type="submit">Adicionar Colaborador</button>
+  </form>
+
+  <!-- Formulário de edição, escondido até se clicar em "Editar" numa linha -->
+  <form class="collab-form" id="editCollabForm" style="display:none; border-top: 1px solid #2a2e38; padding-top: 1rem; margin-top: 1rem;">
+    <input type="hidden" id="editId">
+    <input type="text" id="editName" placeholder="Nome">
+    <select id="editRole">
+      <option value="worker">Funcionário</option>
+      <option value="admin">Admin</option>
+    </select>
+    <input type="password" id="editPassword" placeholder="Nova password (opcional)">
+    <p class="error-text" id="editError"></p>
+    <div class="actions-row">
+      <button type="submit">Guardar</button>
+      <button type="button" class="secondary" id="btnCancelEdit">Cancelar</button>
+    </div>
+  </form>
+
+  <table>
+    <thead><tr><th>Nome</th><th>RFID</th><th>Role</th><th>Estado</th><th></th></tr></thead>
+    <tbody id="collabsBody"></tbody>
+  </table>
+</section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="auth.js"></script>
+  <script src="api.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

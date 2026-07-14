@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Enterprise System — Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="login-screen">
+    <div class="login-box">
+      <h1>Smart Enterprise System</h1>
+      <form id="loginForm">
+        <input type="text" id="rfidUid" placeholder="RFID UID" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <p class="error-text" id="loginError"></p>
+        <button type="submit">Entrar</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="auth.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>
